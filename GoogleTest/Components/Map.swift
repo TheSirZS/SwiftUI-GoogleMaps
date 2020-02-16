@@ -11,23 +11,49 @@ import GoogleMaps
 
 struct Map: UIViewRepresentable {
     
-    let marker : GMSMarker = GMSMarker()
+    var mapView = GMSMapView()
+    var manager = CLLocationManager()
+    
+    func makeCoordinator() -> Map.Coordinator {
+        return Coordinator(self)
+    }
 
     func makeUIView(context: Self.Context) -> GMSMapView {
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
-        let padding = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
-        mapView.padding = padding
-
+        self.mapView.delegate = context.coordinator
+        
+        if (CLLocationManager.locationServicesEnabled()) {
+            self.manager.desiredAccuracy = kCLLocationAccuracyBest
+            self.manager.startUpdatingLocation()
+            self.mapView.isMyLocationEnabled = true
+            if let user = self.manager.location {
+                let padding = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
+                self.mapView.padding = padding
+                let camera = GMSCameraPosition.camera(withLatitude: user.coordinate.latitude, longitude: user.coordinate.longitude, zoom: 15.0)
+                self.mapView.animate(to: camera)
+            }
+        }
         return mapView
     }
     
     func updateUIView(_ mapView: GMSMapView, context: Self.Context) {
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
-        marker.map = mapView
+        
+    }
+    
+    class Coordinator: NSObject, GMSMapViewDelegate {
+        var parent: Map
+        
+        init(_ parent: Map) {
+            self.parent = parent
+        }
+        
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            if let location = locations.last {
+                let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15.0)
+                self.parent.mapView.animate(to: camera)
+                self.parent.manager.stopUpdatingLocation()
+            }
+        }
     }
 }
 
