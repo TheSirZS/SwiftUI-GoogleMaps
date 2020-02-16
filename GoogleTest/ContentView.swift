@@ -9,13 +9,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var query: String = ""
+    
     var body: some View {
-        Text("Hello, World!")
+        ZStack {
+            Map()
+            VStack {
+                Spacer()
+                BottomSheet {
+                    VStack {
+                        Handle().padding(5)
+                        SearchBar(query: self.$query).padding(.top, 5)
+                        Spacer()
+                    }
+                }
+            }
+        }.edgesIgnoringSafeArea(.vertical)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group {
+            ContentView()
+               .environment(\.colorScheme, .light)
+
+            ContentView()
+               .environment(\.colorScheme, .dark)
+        }
     }
 }
