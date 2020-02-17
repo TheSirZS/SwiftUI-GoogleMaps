@@ -12,7 +12,8 @@ struct BottomSheet<Content: View> : View {
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @GestureState private var dragState = DragState.inactive
-    @State var position = SheetPosition.bottom
+    @State var position = SheetPosition.middle
+    @Binding var isTapped: Bool
     
     var content: () -> Content
     var body: some View {
@@ -28,8 +29,8 @@ struct BottomSheet<Content: View> : View {
         }
         .frame(height: UIScreen.main.bounds.height)
         .background(self.colorScheme == .light ? Color.white : Color.black)
-        .cornerRadius(10.0)
-        .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.20), radius: 10.0)
+        .cornerRadius(15.0)
+        .shadow(radius: 20)
         .offset(y: self.position.rawValue + self.dragState.translation.height)
         .animation(self.dragState.isDragging ? nil : .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
         .gesture(drag)
@@ -63,13 +64,14 @@ struct BottomSheet<Content: View> : View {
         } else {
             self.position = closestPosition
         }
+
     }
 }
 
 enum SheetPosition: CGFloat {
     case top = 100
     case middle = 500
-    case bottom = 720
+    case bottom = 501
 }
 
 enum DragState {

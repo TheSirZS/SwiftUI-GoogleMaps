@@ -7,10 +7,22 @@
 //
 
 import SwiftUI
+import GooglePlaces
+import GoogleMaps
 
 struct SearchBar: UIViewRepresentable {
 
     @Binding var query: String
+    @Binding var mapView: GMSMapView
+    @Binding var matchLocations: [GMSAutocompletePrediction]
+    
+    lazy var filter: GMSAutocompleteFilter = {
+        let filter = GMSAutocompleteFilter()
+        filter.country = "mx"
+        filter.type = .address
+        filter.type = .establishment
+        return filter
+    }()
 
     func makeCoordinator() -> SearchBar.Coordinator {
         return SearchBar.Coordinator(parent: self)
@@ -40,6 +52,23 @@ struct SearchBar: UIViewRepresentable {
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             self.parent.query = searchText
+
+            let neBoundsCorner = CLLocationCoordinate2D(latitude: 23.962542, longitude: -104.731688)
+            let swBoundsCorner = CLLocationCoordinate2D(latitude: 24.151364, longitude: -104.504163)
+
+            let bounds = GMSCoordinateBounds(coordinate: neBoundsCorner, coordinate: swBoundsCorner)
+
+            GMSPlacesClient().autocompleteQuery(self.parent.query, bounds: bounds, filter: self.parent.filter) { (results, error) in
+                DispatchQueue.main.async {
+                    guard error == nil else {
+                        print("Autocomplete error \(error!.localizedDescription)")
+                      return
+                    }
+                    if let results = results {
+                        self.parent.matchLocations = results
+                    }
+                }
+            }
         }
     }
 }

@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		469FCA3D23F8F47300C7912D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469FCA3C23F8F47300C7912D /* AppDelegate.swift */; };
 		469FCA3F23F8F47300C7912D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469FCA3E23F8F47300C7912D /* SceneDelegate.swift */; };
-		469FCA4123F8F47300C7912D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469FCA4023F8F47300C7912D /* ContentView.swift */; };
+		469FCA4123F8F47300C7912D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469FCA4023F8F47300C7912D /* MapView.swift */; };
 		469FCA4323F8F47500C7912D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 469FCA4223F8F47500C7912D /* Assets.xcassets */; };
 		469FCA4623F8F47500C7912D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 469FCA4523F8F47500C7912D /* Preview Assets.xcassets */; };
 		469FCA4923F8F47500C7912D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 469FCA4723F8F47500C7912D /* LaunchScreen.storyboard */; };
 		469FCA5223F8F72700C7912D /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469FCA5123F8F72700C7912D /* BottomSheet.swift */; };
 		469FCA5423F8FBC000C7912D /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469FCA5323F8FBC000C7912D /* Handle.swift */; };
 		469FCA5623F903E000C7912D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469FCA5523F903E000C7912D /* SearchBar.swift */; };
+		46B32FAC23FB146E000B412E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B32FAB23FB146E000B412E /* SearchView.swift */; };
 		46D81FAD23F90B9700D1B585 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D81FAC23F90B9700D1B585 /* Map.swift */; };
 		D67AB9A550427CFD4BB08162 /* Pods_GoogleTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F2CA73CBAB7CAAF8A53D7E8 /* Pods_GoogleTest.framework */; };
 /* End PBXBuildFile section */
@@ -24,7 +25,7 @@
 		469FCA3923F8F47300C7912D /* GoogleTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		469FCA3C23F8F47300C7912D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		469FCA3E23F8F47300C7912D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		469FCA4023F8F47300C7912D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		469FCA4023F8F47300C7912D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		469FCA4223F8F47500C7912D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		469FCA4523F8F47500C7912D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		469FCA4823F8F47500C7912D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -32,6 +33,7 @@
 		469FCA5123F8F72700C7912D /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		469FCA5323F8FBC000C7912D /* Handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
 		469FCA5523F903E000C7912D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		46B32FAB23FB146E000B412E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		46D81FAC23F90B9700D1B585 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		8DDA538957DE412B397DF361 /* Pods-GoogleTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleTest.debug.xcconfig"; path = "Target Support Files/Pods-GoogleTest/Pods-GoogleTest.debug.xcconfig"; sourceTree = "<group>"; };
 		8F2CA73CBAB7CAAF8A53D7E8 /* Pods_GoogleTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,10 +73,10 @@
 		469FCA3B23F8F47300C7912D /* GoogleTest */ = {
 			isa = PBXGroup;
 			children = (
+				46B32F9F23FAEB1D000B412E /* Views */,
 				469FCA5023F8F70A00C7912D /* Components */,
 				469FCA3C23F8F47300C7912D /* AppDelegate.swift */,
 				469FCA3E23F8F47300C7912D /* SceneDelegate.swift */,
-				469FCA4023F8F47300C7912D /* ContentView.swift */,
 				469FCA4223F8F47500C7912D /* Assets.xcassets */,
 				469FCA4723F8F47500C7912D /* LaunchScreen.storyboard */,
 				469FCA4A23F8F47500C7912D /* Info.plist */,
@@ -100,6 +102,15 @@
 				46D81FAC23F90B9700D1B585 /* Map.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		46B32F9F23FAEB1D000B412E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				469FCA4023F8F47300C7912D /* MapView.swift */,
+				46B32FAB23FB146E000B412E /* SearchView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		561332E2C2649A7FA27C574D /* Pods */ = {
@@ -238,8 +249,9 @@
 				469FCA3F23F8F47300C7912D /* SceneDelegate.swift in Sources */,
 				46D81FAD23F90B9700D1B585 /* Map.swift in Sources */,
 				469FCA5423F8FBC000C7912D /* Handle.swift in Sources */,
+				46B32FAC23FB146E000B412E /* SearchView.swift in Sources */,
 				469FCA5223F8F72700C7912D /* BottomSheet.swift in Sources */,
-				469FCA4123F8F47300C7912D /* ContentView.swift in Sources */,
+				469FCA4123F8F47300C7912D /* MapView.swift in Sources */,
 				469FCA5623F903E000C7912D /* SearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,8 +11,8 @@ import GoogleMaps
 
 struct Map: UIViewRepresentable {
     
-    var mapView = GMSMapView()
-    var manager = CLLocationManager()
+    @Binding var mapView: GMSMapView
+    @Binding var manager: CLLocationManager
     
     func makeCoordinator() -> Map.Coordinator {
         return Coordinator(self)
@@ -21,17 +21,19 @@ struct Map: UIViewRepresentable {
     func makeUIView(context: Self.Context) -> GMSMapView {
         
         self.mapView.delegate = context.coordinator
+        let padding = UIEdgeInsets(top: 100, left: 0, bottom: 370, right: 0)
+        self.mapView.padding = padding
         
         if (CLLocationManager.locationServicesEnabled()) {
             self.manager.desiredAccuracy = kCLLocationAccuracyBest
             self.manager.startUpdatingLocation()
             self.mapView.isMyLocationEnabled = true
-            if let user = self.manager.location {
-                let padding = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
-                self.mapView.padding = padding
-                let camera = GMSCameraPosition.camera(withLatitude: user.coordinate.latitude, longitude: user.coordinate.longitude, zoom: 15.0)
-                self.mapView.animate(to: camera)
-            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: {
+                if let user = self.manager.location {
+                    let camera = GMSCameraPosition.camera(withLatitude: user.coordinate.latitude, longitude: user.coordinate.longitude, zoom: 15.0)
+                    self.mapView.animate(to: camera)
+                }
+            })
         }
         return mapView
     }
